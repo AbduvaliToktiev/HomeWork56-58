@@ -1,7 +1,5 @@
 package com.example.homework5658.entity;
 
-import com.example.homework5658.enums.StatusTask;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -13,8 +11,8 @@ import java.util.List;
 @Builder
 @Getter
 @Setter
-@Table(name = User.TABLE_NAME)
-public class User {
+@Table(name = Users.TABLE_NAME)
+public class Users {
     public static final String TABLE_NAME = "USERS";
     public static final String SEQ_NAME = TABLE_NAME + "_SEQ";
 
@@ -32,8 +30,8 @@ public class User {
     @Column(name = "PASSWORD")
     private String password;
 
-    @JsonIgnore
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
-    List<Task> task;
-
+    @ManyToMany(cascade = CascadeType.DETACH, fetch = FetchType.EAGER)
+    @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
+    @Column(name = "ROLE")
+    private List<Role> roles;
 }

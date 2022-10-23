@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
-import java.sql.Date;
+import java.util.Date;
 
 @Entity
 @AllArgsConstructor
@@ -32,11 +32,11 @@ public class Task {
     @Column(name = "DATE_TASK")
     private Date dateTask;
 
+    @Column
     @Enumerated(EnumType.STRING)
     private StatusTask statusTask;
 
-    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "user_id")
-    private User user;
+    private Users user;
 }
