@@ -33,7 +33,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         httpSecurity.
                 csrf().disable()
                 .authorizeRequests().antMatchers("/user/registration").permitAll()
-                .antMatchers("/save-task", "/get-all-task").hasAuthority("USER")
+                .antMatchers("/save-task", "/get-all-task", "/change-status", "/get-all-by-task-id").hasAuthority("USER")
                 .anyRequest().authenticated()
                 .and().httpBasic()
                 .and().sessionManagement().disable();
